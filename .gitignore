@@ -1,0 +1,7 @@
+.env
+.venv
+.mypy_cache
+**__pycache__**
+pytest_unit.xml
+**/*.log
+.DS_Store
