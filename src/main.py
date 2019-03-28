@@ -1,33 +1,52 @@
-# '''
-# Doc string
-# '''
+'''
+Doc string
+'''
 
-import os
 import typing
 
-from module_example import xxx
+#
+# Demo imports from module and package
+#
+from module_example import demo_variable_imported_from_module as x
+from package_example import demo_variable_imported_from_package as y
 
-print(xxx)
+print("\n>>>"+x)
+print("\n>>>"+y)
 
-print("This line is way too long!!! -------------------------------------------------------------------------------------------------")
+#
+# Demo usage of python typing system
+# Try changing types to confirm VSCode mypy is correctly integrated
+#
+example_float: float = 3.14
+example_int: int = 1
+example_str: str = "Wow!"
 
-# my_directories: typing.List[str] = os.listdir()
+example_list: typing.List[typing.Union[float, int, str]] = [
+    example_float,
+    example_int,
+    example_str
+]
 
-# print(my_directories)
+for i in example_list:
+    print("\n-->"+str(i)+"  <-> "+str(type(i)))
 
-
-class MyClass:
-    '''Token Docstring'''
-    x = 5
-
-
-p1: MyClass = MyClass()
-print(p1.x)
-
-
-x: int = 1
+#
+# Demo class
+#
 
 
-def test_xxx() -> None:
-    z = 1
-    assert 1 == 1
+class Pet:
+    '''Docstring'''
+
+    def __init__(self, name: str, animal: str):
+        '''Docstring'''
+        self.name = name
+        self.animal = animal
+
+    def who_am_i(self: "Pet") -> None:
+        '''Docstring'''
+        print("\n"+self.name+" is a "+self.animal+"\n\n")
+
+
+pet1: Pet = Pet("Scooby", "Dog")
+pet1.who_am_i()
