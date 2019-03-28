@@ -169,3 +169,7 @@ Python is a dynamically typed language, which basically means that types are app
 If you want to employ test-driven development, then you'll need to run python's tool for unit testing `pytest` from the root dir (or any files that you wish to target). `pytest` will look for functions in your code beginning with `test_`, run them, and report the results of the `assert` command.
 
 This repo places all unit tests in files prefixed `test_*.py` (which is what `pytest` looks for) in the `tests` directory. You can then run tests by the command `pytest` in order to print out a testing report.
+
+If all goes well, then you'll have a rich python-coding experience with VSCode. Enjoy!
+
+![](https://s3.amazonaws.com/dwds-misc/vscode-python-screenshot.png)
