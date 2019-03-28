@@ -29,8 +29,8 @@ main() {
 
     ### 2. Check for existence of `.venv` dir
     if [ ! -d $PWD/.venv ]; then
-        echo "Virtual Environment Not Found -- Creating './.venv'"
-        $VIRTUALENV --python=$PYTHON_3_5_OR_HIGHER ./.venv
+        echo "Virtual Environment Not Found -- Creating '.venv'"
+        $PYTHON_3_5_OR_HIGHER -m venv .venv
     fi
 
     ### 3. Activate VENV

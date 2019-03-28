@@ -1,5 +1,5 @@
 {
-    "python.pythonPath": ".venv-test/bin/python",
+    "python.pythonPath": ".venv/bin/python",
     "python.envFile": "${workspaceRoot}/.env",
     "python.jediEnabled": false,
     "editor.snippetSuggestions": "none",
