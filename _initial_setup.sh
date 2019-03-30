@@ -42,6 +42,9 @@ main() {
     ### 5. Install Requirements to VENV
     pip install -r requirements.txt
 
+    ### 6. Link git pre-commit-hook script
+    ln -fs $PWD/_precommit_hook.sh $PWD/.git/hooks/pre-commit
+
 }
 
 ## Trick to check if this script is being sourced or sh-ed

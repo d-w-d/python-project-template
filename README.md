@@ -145,6 +145,10 @@ You do NOT want to spend time/effort lining up code blocks, tabbing brackets, et
     -   Note: if you prefer not to have your code formatted on each save, then you can run formatting manually with `shift+option+f`
     -   Note: on some occasions you may want to save without formatting; this can be done by the key sequence `command+k;s` (`command+k` at the same time followed by pressing `s`)
 
+#### Auto-Formatting with Git Pre-Commit Hook
+
+To ensure that we have consistent code formatting across developers' contributions, this repo includes a script called `_precommit_hook.sh`. The initialization script will link this script to `.git/hooks/pre-commit`, which is what `git` looks to run just before running the commit.
+
 #### Linting in VSCode
 
 Auto-formatting normally solves formatting problems in our code. But we also want to see warnings of poor code features in the VSCode interface ahead of auto-formatting, and in cases where auto-formatting doesn't solve the problem (for example, by declaring unused variables). The process of analyzing functional code and automatically getting it into a state that follows best practices is known as 'linting'. The main linting tool in python is called `pylint`. To enable it in VSCode:
