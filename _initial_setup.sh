@@ -25,7 +25,13 @@ main() {
     rm -rf src/__pycache__
 
     ### 1. Load vars defined in .env
-    eval $(cat .env | sed 's/^/export /')
+    if [ ! -f $PWD/.env ]; then
+        echo "Loading env vars from .env"
+        eval $(cat .env | sed 's/^/export /')
+    else
+        echo "No .env file found!"
+        exit 1
+    fi
 
     ### 2. Check for existence of `.venv` dir
     if [ ! -d $PWD/.venv ]; then
