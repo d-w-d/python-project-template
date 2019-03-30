@@ -28,7 +28,7 @@ example_list: typing.List[typing.Union[float, int, str]] = [
 ]
 
 for i in example_list:
-    print(     "\n-->"+str(i)+"  <-> "+str(type(i)))
+    print("\n-->"+str(i)+"  <-> "+str(type(i)))
 
 #
 # Demo class
