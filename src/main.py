@@ -1,5 +1,5 @@
 '''
-Doc string
+Placeholder Doc String
 '''
 
 import typing
@@ -30,9 +30,7 @@ example_list: typing.List[typing.Union[float, int, str]] = [
 for i in example_list:
     print("\n-->"+str(i)+"  <-> "+str(type(i)))
 
-#
 # Demo class
-#
 
 
 class Pet:

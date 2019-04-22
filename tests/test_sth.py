@@ -5,9 +5,9 @@ Doc string
 import os
 import typing
 
-from module_example import xxx
+from module_example import demo_variable_imported_from_module
 
-print(xxx)
+print(demo_variable_imported_from_module)
 
 
 class MyClass:
@@ -18,8 +18,12 @@ p1 = MyClass()
 print(p1.x)
 
 
-x: int = 1.3
+x: int = 1
 
 
-def test_xxx() -> None:
+def test_1() -> None:
     assert 1 == 1
+
+
+def test_2() -> None:
+    assert demo_variable_imported_from_module == "Hello! I come from the module 'module_example.py'"

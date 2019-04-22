@@ -41,7 +41,7 @@ main() {
     source ./.venv/bin/activate
 
     ### 4. Install dependencies from Pipfile & Pipfile.lock
-    pipenv install
+    PIPENV_VERBOSITY=-1 pipenv install --dev
 
     ### 5. Link git pre-commit-hook script
     ln -fs $PWD/_precommit_hook.sh $PWD/.git/hooks/pre-commit
