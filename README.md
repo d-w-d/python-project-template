@@ -6,27 +6,53 @@ This is a template python project with instructions for setting up in [VSCode](h
 
 ## Why Visual Studio Code (VSCode)?
 
-Writing serious code without an IDE or feature-rich text-editor is like trying to run in the olympics without shoes. So take the time to master at least one IDE/editor for your major software needs. I highly recommend Microsoft's text editor [Visual Studio Code](https://code.visualstudio.com) (often abbreviated to `VSCode`). Beware: VSCode is not to be confused with Microsoft's IDE [Visual Studio](https://visualstudio.microsoft.com)).
+Writing serious code without an IDE or feature-rich text-editor is like trying to run in the olympics without shoes. So take the time to master at least one IDE/editor for your major software needs. I recommend Microsoft's text editor [Visual Studio Code](https://code.visualstudio.com) (often abbreviated to `VSCode`). Beware: VSCode is not to be confused with Microsoft's IDE [Visual Studio](https://visualstudio.microsoft.com)).
 
-VSCode is free and its functionality is easily extended with plethora of community-written 'extensions' that make VSCode end up feeling more like a fully-fledged IDE than a text editor.
+VSCode is free and its functionality can be easily extended by choosing from the many community-written 'extensions' that make VSCode end up feeling more like a fully-fledged IDE than a text editor.
 
 ![Image of VSCode Editor](https://code.visualstudio.com/assets/docs/getstarted/userinterface/hero.png)
 
-VSCode is open-source and especially popular for web-development; it's best known for its javascript/typescript support, but its growing popularity means that extensions are becoming increasingly available across all major languages and configuration-file formats. (In addition to javascript, I've personally found it to be great for python, bash and php.)
+VSCode is open-source and especially popular for web-development; it's best known for its javascript/typescript support, but its growing popularity means that extensions are becoming increasingly available across all major languages and configuration-file formats.
 
 ## General Set Up
+
+### Installing VSCode
+
+If you're a Mac user, then I recommend that whenever you can install something via homebrew, you install it via homebrew.
+
+```bash
+brew search vscode
+==> Casks
+visual-studio-code  visual-studio-code-insiders
+
+brew cask install visual-studio-code
+```
+
+If you're using Linux or PC, then try searching for it in your package manager; if unavailable, then download the application from ![](https://code.visualstudio.com).
+
+### Launching VSCode from Command Line
+
+Most of my coding involves the command line, and so I find myself almost always wanting to open a file or directory in VSCode from the command line. VSCode on a Mac comes with a command-line tool `code`, which I use to open files or directories:
+
+```bash
+code -n XXX
+```
+
+I use this so often that I've created an alias for it: `alias alvsc='code -n'`
 
 ### Customizing VSCode with User and Workspace Settings
 
 There is a small but non-negligible learning curve for VSCode. The single most important thing to understand is how you customize your experience. You do this by setting values in two special `json` files. One of these files is for your global 'user' settings, and the other is for your local 'workspace' settings.
 
-The workspace settings go in your project directory within a `.vscode` folder. You can see one in this repository, with settings specific to python development. These workspace settings take precedence over your user settings.
+To get to an inteface to adjust either of these sets of settings go to Code > Preferences > Settings. The interface lets you choose between `User Settings` and `Workspace Settings`. (To see the raw JSON files, you can click on the icon with curly brackets near the top right corner.)
 
-VSCode comes with myriad settings, each with a default value that applies unless you override that value by providing a setting in your user and/or workspace settings. For example, VSCode's default tab size is given by the default setting `"editor.tabSize": 4`. If you add, for example, `"editor.tabSize": 2` to your user-settings `json` file, then your tab key will generate 2 spaces in all your files. If, however, in one of your workspaces you have the file `.vscode/settings.json` with `"editor.tabSize": 6`, then files in that folder will get 6 spaces, etc. etc.
+When you create any non-default `Workspace Settings` in the UI, VSCode will generate a corresponding `.vscode` folder in your project root directory. You can see one in this repository, with settings specific to python development. These workspace settings take precedence over your `User Settings`. (Likewise, when you set global `User Settings`, a JSON file is updated somewhere on your system; on a Mac, this file is at `~/Library/Application\ Support/Code/User/settings.json`).
+
+VSCode comes with myriad possible settings, each with a default value that applies unless you override that value by providing a setting in your `User Settings` and/or `Workspace settings`. For example, VSCode's default tab size is given by the default setting `"editor.tabSize": 4`. If you add, for example, `"editor.tabSize": 2` to your user-settings `json` file, then your tab key will generate 2 spaces in all your files. If, however, in one of your work spaces you have the file `.vscode/settings.json` with `"editor.tabSize": 6`, then files in that particular folder will get 6 spaces, etc. etc.
 
 ### VSCode Extensions
 
-The VSCode interface lets you easily search and install a host of awesome `extensions` that give VSCode additional powers. Here I want to mention some extensions that I recommend you install no matter what programming language you plan to use.
+The VSCode interface lets you easily search and install a host of `extensions` that give VSCode additional powers. Here I want to mention some extensions that I recommend you install no matter what programming language you plan to use.
 
 One such example is [Indent Rainbow](https://github.com/oderwat/vscode-indent-rainbow) that adds color to your indentation, helping you to trace your code blocks up and down the page. In general, when you add an extension, additional settings with defaults will be made available to your VSCode set up.
 
@@ -34,14 +60,14 @@ For example, if you install `Indent Rainbow`, then your default settings will re
 
 ```jsonc
 {
-    // ...,
-    "indentRainbow.colors": [
-        "rgba(255,255,64,0.07)",
-        "rgba(127,255,127,0.07)",
-        "rgba(255,127,255,0.07)",
-        "rgba(79,236,236,0.07)"
-    ]
-    // ...
+  // ...,
+  "indentRainbow.colors": [
+    "rgba(255,255,64,0.07)",
+    "rgba(127,255,127,0.07)",
+    "rgba(255,127,255,0.07)",
+    "rgba(79,236,236,0.07)"
+  ]
+  // ...
 }
 ```
 
@@ -49,38 +75,46 @@ So if you want to customize the sequence of colors that show up when you indent 
 
 These are the VSCode plugins that I recommend no matter what languages you plan to work with:
 
--   Trailing Spaces
--   Git Lens
--   Rainbow Brackets
--   Rainbow Indent
--   Better Comments
+- Trailing Spaces
+- Git Lens
+- Rainbow Brackets
+- Rainbow Indent
+- Better Comments
 
 ## Python Development
 
-In addition to the general set-up recommendations given above, I'll now describe the extensions, scripts, configuration files and directory structure that I recommend whenever starting out on a python project. The idea of such a template repository is that you can simply run `git clone` in order to get going quickly and productively with a python project.
+In addition to the general set-up recommendations given above, I'll now describe the extensions, scripts, configuration files and directory structure that I recommend when starting out on a python project, and as embodied in this repo. The idea of such a template repository is that you can simply run `git clone [this repo url on github]` in order to get going quickly and productively with a python project.
 
-### Scripts, scripts, scripts
+### Scripting
 
-I highly recommend that you write scripts liberally when developing code. Any command or sequence of commands that you expect to perform routinely -- even if they seem trivial -- are best committed to a script. Why? First, even if the commands that you use to operate the code seem trivial now, they may not seem at all trivial when you come back to the code in a year. Second, others who use your code will be able to operate your codebase far more quickly and intelligently if you leave them scripts.
+I recommend that you write scripts liberally when developing code. Any command or sequence of commands that you expect to perform routinely -- even if they seem trivial -- are best committed to a script. Why? Three resons:
 
-So choose a shell and commit yourself to attaining a blackbelt at that art form. I chose \`bash\`.
+1. Even if the commands that you use to operate the code seem trivial to you now, they may not seem at all trivial when you come back to the code in the future.
+2. Others who use your code will be able to operate your codebase far more quickly and intelligently if you leave them scripts.
+3. Scripts also provide a sensible place to put comments to make the operation of your code base clear and consistent.
+
+So choose a shell and commit yourself to attaining a black belt at that art form. This repo uses \`bash\`.
 
 By convention, I reserve the underscore '\_' as my script-name prefix, and I like to give my scripts lengthy names so its clear what they're all about.
 
-### Installing Python and Using Virtual Environments
+### Python3 Executable, Virtual Environments & Package Management
 
 #### Python Version 3.5+
 
-This repo is designed for starting NEW python projects following guidelines and constraints for python 3.5 or higher. If your goal is take legacy code and integrate it with python3 scripts within this template project, then you have two basic approaches:
+This repo is designed for starting NEW python projects following guidelines and constraints for python 3.5 or higher. If your goal is take legacy code in python2 and integrate it with python3 scripts within this template project, then you have two basic approaches:
 
--   launch your e.g. legacy python2 script(s) as a shell process as suggested [here](https://stackoverflow.com/a/42229700/8620332) (recommended);
--   undertake a painful rehabilitation of your legacy code so that it is python3-compliant as outlined [here](https://docs.python.org/3/howto/pyporting.html) (not recommended).
+- launch your e.g. legacy python2 script(s) as a shell process as suggested [here](https://stackoverflow.com/a/42229700/8620332) (recommended);
+- undertake a painful rehabilitation of your legacy code so that it is python3-compliant as outlined [here](https://docs.python.org/3/howto/pyporting.html) (not recommended).
 
-#### Virtual Environment
+If you want to run your project with a specific version of python, e.g. python3.6, then it's best to install that version directly using the main package manager on your OS (homebrew, apt, yum, etc.). If that is not an option, then the next-best optiuon is to use the [pyenv](https://github.com/pyenv/pyenv) tool. In any case, I recommend getting the latest version of python3, which will be available from your OS package manager.
 
-Python has been around a while (since the early 90s) and so its many ways of managing executable versions and python packages has evolved into a confusing ecosystem of competing tools (`virtualenv`, `pipenv`, `pyvenv`, `venv`, `conda`, etc.) each claiming to be 'the right way'.
+Once installed on your OS, locate your python3 executable and use the full path to that executable to set the env variable `PYTHON_3_5_OR_HIGHER` in your `.env` file (see below).
 
-The approach taken is based on the [official python recommendation](https://docs.python.org/3/library/venv.html) to use the `venv` module when using python 3.6 or higher. I highly recommend you _memorize_ the following sequence as part of your python know-how:
+#### Virtual Environments
+
+Python has been around a while (since the early 90s) and so its many ways of managing executable versions and packages has evolved into a confusing ecosystem of competing tools (`virtualenv`, `pipenv`, `pyvenv`, `venv`, `conda`, etc.) each claiming to be 'the right way'.
+
+The approach taken here is based on the [official python recommendation](https://docs.python.org/3/library/venv.html) to use the `venv` module when using python 3.6 or higher. I highly recommend you _memorize_ the following sequence as part of your general python know-how:
 
 ```bash
     cd my_new_python_project
@@ -90,30 +124,51 @@ The approach taken is based on the [official python recommendation](https://docs
     deactivate
 ```
 
-Sourcing the `activation` script adjusts your working shell by adding/altering the following `env` variables:
+Sourcing the `activate` script adjusts your working shell by adding/altering the following `env` variables:
 
--   It adjusts PS1 so that your command prompt displays the name you gave to your virtual environment
--   It adds an env variable enabling the former value of PS1 to be restored upon deactivation; in my case that env var is `ITERM_ORIG_PS1`
--   It creates an env variable `VIRTUAL_ENV` pointing to the virtualenv directory you just created
--   It prepends your `PATH` env variable with a path pointing to `/path/to/my_new_python_project/.venv/bin`; this ensures that the first which
+- It adjusts PS1 so that your command prompt displays the name you gave to your virtual environment
+- It adds an env variable enabling the former value of PS1 to be restored upon deactivation; in my case that env var is `ITERM_ORIG_PS1`
+- It creates an env variable `VIRTUAL_ENV` pointing to the virtualenv directory you just created
+- It prepends your `PATH` env variable with a path pointing to `/path/to/my_new_python_project/.venv/bin`; this ensures that the first which
 
-#### Installation on Mac
+(Note: although this repo will also use the `pipenv` tool (see below), and this tool can also be used to create virtual environments, this repo uses the recommended `python3 -m venv VENV_NAME` approach to creating and activating virtual environments because the equivalent way of doing this with `pipenv` is, IMO, convoluted and confusing.)
 
-Mac comes with python2 installed. I recommend getting the latest build by installing it with homebrew: `brew install python`. Once installed, locate your python interpreter (`/usr/local/bin/python3` for brew version) and use this path to set the env variable `PYTHON_3_5_OR_HIGHER` in your `.env` file (see below).
+#### Package Management
+
+The 'classic' way to install and manage packages is using `pip`. When you create a virtual environment with `python3` (as this repo requires; see below), then your active instance of pip will be given within your local virtual-env directory (in this repo, that's `.venv/bin/pip`). You could then use pip to install packages (e.g. `pip install requests`) and, on the classic approach, you could 'freeze' requirements by running `sh _freeze_requirements.sh`, which outputs all locally installed packages to file `requirements.txt`.
+
+The more sophisticated way to manage packages is with the `pipenv` tool. As mentioned above, `pipenv` was designed to handle _everything_ to do with virtual environments and package management, but we're only using it here for package management. Unlike `pip`, the `pipenv` tool will generate a `lock file` that enables deterministic builds and handles conflicting dependency-package requirements. (This is analogous to `Gemfile.lock` in ruby and `package-lock.json` in node; see [here](https://pipenv.readthedocs.io/en/latest/) for more info on the subject.)
+
+Run the following global (i.e. not with a virtual environment activated) commands to install `pipenv`:
+
+```bash
+pip3 install --upgrade --user pip
+pip3 install pipenv
+### Test for success:
+which pipenv
+```
+
+### Operating This Repo
 
 #### Initialization Script
 
-This repo includes a script called `_initial_setup.sh` that makes it easy and consistent to start up your python virtual environment. The first thing it does is to load in the contents of the `.env` file in order to locate the `python3` executable on your machine.
+This repo includes a script called `_initial_setup.sh` that makes it easy and consistent to start up your python virtual environment.
 
-(The `.env` file is not committed to the git repo since, in general, it will contain passwords and directory structures that you want to keep confidential, so copy `.env-template` to `.env` and fill in the paths for `PYTHON_3_5_OR_HIGHER`, etc.)
+The first thing this script does is to load in the contents of the `.env` file in order to locate the `python3` executable on your machine. (The `.env` file is not committed to the git repo since, in general, it will contain passwords and directory structures that you want to keep confidential, so copy `.env-template` to `.env` and fill in the paths for `PYTHON_3_5_OR_HIGHER`, etc.)
 
-`_initial_setup.sh` is designed to fail unless it is _sourced_ from your command line (and not executed with e.g. `sh`). Once it creates the python virtual environment and activates it, it upgrades pip and installs all packages specified in `requirements.txt` to your virtual environment.
+`_initial_setup.sh` is designed to fail unless it is _sourced_ from your command line (and not executed with e.g. `sh`).
+
+<!-- Once it creates the python virtual environment and activates it, it upgrades pip and installs all packages specified in `requirements.txt` to your virtual environment. -->
+
+Once it creates the python virtual environment and activates it, it uses `pipenv` to install requirements specified in the Pipfile.
 
 Running `source _initial_setup.sh` is idempotent, so get in the habit of running regularly whenever you want to get up and running with your development. Once activated, your virtual environment's name `.venv` will be displayed at your command prompt.
 
 #### Adding Packages
 
-As you develop within your virtual environment, you'll be adding python packages using `pip install PACKAGENAME`, which will install the package to `.venv`. To make a permanent record of an installed package, run `sh _freeze_requirements` to get it added to `requirements.txt`. Once added to `requirements.txt`, this package will be installed/confirmed-as-installed whenever you run your `_initial_setup.sh` script.
+As you develop within your virtual environment, you'll be adding python packages using `pipenv install PACKAGENAME` or `pipenv install --dev PACKAGENAME`, which will install the package to `.venv` and add it to the `Pipfile` and `Pipefile.lock` files.
+
+I recommend that you install packages without the `--dev` flag iff the package will be needed at application runtime (e.g. `flask`). If the package is only needed for development (e.g. `pytest`), then use `--dev`.
 
 #### Directory Structure
 
@@ -127,10 +182,10 @@ Many of the following features require the VSCode extension supported by Microso
 
 VSCode equipped with the extensions just mentioned will analyze your code and flag a wide variety of errors. But VSCode needs to know where your code is. By default, it will look for python scripts in the root directory, but if you have your code in a nested dir, as we have here in `src`, then we need to let VSCode know this. To accomplish this:
 
--   For consistency, we want VSCode to analyze our code with the same interpreter that we'll be using to execute our code. To point VSCode to the interpreter in our virtual environment add `"python.pythonPath": ".venv/bin/python"` to `.vscode/settings.json`
--   Add the environment variable `PYTHONPATH` to your `.env` file and equate set it to colon-separated paths to any directory where you want VSCode to look for python scripts. In our case, we can minimally set it to `PYTHONPATH=src`.
--   To get VSCode to load in our `.env` file and digest the contents of the `PYTHONPATH` env variable, add `"python.envFile": "${workspaceRoot}/.env"` to `.vscode/settings.json`
--   There are two engines for VSCode intellisense -- 'Microsoft's' and 'Jedi'. To ensure we're using Microsoft's engine, add the setting `"python.jediEnabled": false` to `.vscode/settings.json`.
+- For consistency, we want VSCode to analyze our code with the same interpreter that we'll be using to execute our code. To point VSCode to the interpreter in our virtual environment add `"python.pythonPath": ".venv/bin/python"` to `.vscode/settings.json`
+- Add the environment variable `PYTHONPATH` to your `.env` file and equate set it to colon-separated paths to any directory where you want VSCode to look for python scripts. In our case, we can minimally set it to `PYTHONPATH=src`.
+- To get VSCode to load in our `.env` file and digest the contents of the `PYTHONPATH` env variable, add `"python.envFile": "${workspaceRoot}/.env"` to `.vscode/settings.json`
+- There are two engines for VSCode intellisense -- 'Microsoft's' and 'Jedi'. To ensure we're using Microsoft's engine, add the setting `"python.jediEnabled": false` to `.vscode/settings.json`.
 
 #### Intellisense in VSCode
 
@@ -140,10 +195,10 @@ Intellisense allows you to view and select intelligent options as you type code.
 
 You do NOT want to spend time/effort lining up code blocks, tabbing brackets, etc. while coding. By getting your editor to automatically format your code according to industry standards, you'll save time and make it easier to collaborate with others. To enable auto-formatting in VSCode:
 
--   `pip install autopep8` (and freeze with `sh _freeze_requirements.sh`)
--   If it is not set in your user settings already, then add `"editor.formatOnSave": true` to your `.vscode/settings.json` file.
-    -   Note: if you prefer not to have your code formatted on each save, then you can run formatting manually with `shift+option+f`
-    -   Note: on some occasions you may want to save without formatting; this can be done by the key sequence `command+k;s` (`command+k` at the same time followed by pressing `s`)
+- `pipenv install --dev autopep8`
+- If it is not set in your user settings already, then add `"editor.formatOnSave": true` to your `.vscode/settings.json` file.
+  - Note: if you prefer not to have your code formatted on each save, then you can run formatting manually with `shift+option+f`
+  - Note: on some occasions you may want to save without formatting; this can be done by the key sequence `command+k;s` (`command+k` at the same time followed by pressing `s`)
 
 #### Auto-Formatting with Git Pre-Commit Hook
 
@@ -153,9 +208,9 @@ To ensure that we have consistent code formatting across developers' contributio
 
 Auto-formatting normally solves formatting problems in our code. But we also want to see warnings of poor code features in the VSCode interface ahead of auto-formatting, and in cases where auto-formatting doesn't solve the problem (for example, by declaring unused variables). The process of analyzing functional code and automatically getting it into a state that follows best practices is known as 'linting'. The main linting tool in python is called `pylint`. To enable it in VSCode:
 
--   `pip install pylint` (and freeze with `sh _freeze_requirements.sh`)
--   Add `"python.linting.pylintEnabled": true` to `.vscode/settings.json`
--   Add a pylint configuration file `.pylintrc` to your root dir
+- `pipenv install --dev pylint`
+- Add `"python.linting.pylintEnabled": true` to `.vscode/settings.json`
+- Add a pylint configuration file `.pylintrc` to your root dir
 
 Note: in addition to flagging problems in the VSCode interface, you can also run `pylint src` from the command line to analyze your code and print out a report.
 
@@ -163,10 +218,10 @@ Note: in addition to flagging problems in the VSCode interface, you can also run
 
 Python is a dynamically typed language, which basically means that types are applied loosely and not a big part of the traditional python mindset. However, seeing the success of typescript in the world of javascript, which also has very non-strict types, I am personally encouraged to apply typescript-like analysis in my VSCode experience. To enable type-safety analysis in VSCode we need to set up [mypy](http://mypy-lang.org):
 
--   Add `"python.linting.mypyEnabled": true` to `.vscode/settings.json`
--   `pip install mypy flake8-mypy` (and freeze with `sh _freeze_requirements.sh`)
-    -   Note: to get `mypy` to work we seem to need the `flake8` linter, though we are not using `flake8` as our actual linter, rather, we're using `pylint`. I considered using `flake8` as the linter, but it seems less complete at this point in time than pylint; for example, it doesn't seem to support the flagging of unused global variables.
--   Add a mypy configuration file `mypy.ini` to your root dir
+- Add `"python.linting.mypyEnabled": true` to `.vscode/settings.json`
+- `pipenv install --dev mypy flake8-mypy`
+  - Note: to get `mypy` to work we seem to need the `flake8` linter, though we are not using `flake8` as our actual linter, rather, we're using `pylint`. I considered using `flake8` as the linter, but it seems less complete at this point in time than pylint; for example, it doesn't seem to support the flagging of unused global variables.
+- Add a mypy configuration file `mypy.ini` to your root dir
 
 ### Unit Testing
 

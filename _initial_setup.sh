@@ -8,15 +8,13 @@ main() {
 
     clear
 
-    echo "
-    =======================================================
+    echo """
+        =======================================================
 
-    Initializing Python Virtual Environment
+                Initializing Python Virtual Environment
 
-    (Make sure you're SOURCE-ING not SH-ing this script!)
-
-    =======================================================
-    "
+        =======================================================
+    """
 
     sleep 1
 
@@ -42,13 +40,10 @@ main() {
     ### 3. Activate VENV
     source ./.venv/bin/activate
 
-    ### 4. Upgrade pip
-    pip install --upgrade pip
+    ### 4. Install dependencies from Pipfile & Pipfile.lock
+    pipenv install
 
-    ### 5. Install Requirements to VENV
-    pip install -r requirements.txt
-
-    ### 6. Link git pre-commit-hook script
+    ### 5. Link git pre-commit-hook script
     ln -fs $PWD/_precommit_hook.sh $PWD/.git/hooks/pre-commit
 
 }

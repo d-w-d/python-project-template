@@ -5,3 +5,4 @@
 pytest_unit.xml
 **/*.log
 .DS_Store
+.redundant

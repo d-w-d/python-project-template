@@ -1,8 +1,9 @@
 {
-    "python.pythonPath": ".venv/bin/python",
-    "python.envFile": "${workspaceRoot}/.env",
-    "python.jediEnabled": false,
-    "editor.snippetSuggestions": "none",
-    "python.linting.pylintEnabled": true,
-    "python.linting.mypyEnabled": true
+  "python.pythonPath": ".venv/bin/python",
+  "python.envFile": "${workspaceRoot}/.env",
+  "python.jediEnabled": false,
+  "editor.snippetSuggestions": "none",
+  "python.linting.pylintEnabled": true,
+  "python.linting.mypyEnabled": true,
+  "python.formatting.provider": "autopep8"
 }
