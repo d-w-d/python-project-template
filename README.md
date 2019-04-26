@@ -223,7 +223,11 @@ You do NOT want to spend time/effort lining up code blocks, tabbing brackets, et
 - Run `pipenv install --dev autopep8`
 - If it is not set in your user settings already, then add `"editor.formatOnSave": true` to your `.vscode/settings.json` file.
   - Note: if you prefer not to have your code formatted on each save, then you can run formatting manually with `shift+option+f`
-  - Note: on some occasions you may want to save without formatting; this can be done by the key sequence `command+k;s` (`command+k` at the same time followed by pressing `s` separately.)
+  - Note: on some occasions you may want to save without formatting; this can be done by the key sequence `command+k;s` (`command+k` at the same time followed by pressing `s` separately.) If you also want to make a commit without having your scripts auto-formatted, then you need to follow this sort of sequence:
+  ```bash
+    git add .
+    DONT_FORMAT_ON_CODE_COMMIT=true git commit -m "Your commit message"
+  ```
 
 #### Auto-Formatting with Git Pre-Commit Hook
 
