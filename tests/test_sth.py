@@ -17,7 +17,7 @@ class MyClass:
 p1: MyClass = MyClass()
 print(p1.x)
 
-
+#
 x: int = 1
 
 
