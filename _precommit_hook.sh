@@ -8,6 +8,8 @@ echo '''
 
 '''
 
+echo ">>>>"$DONT_FORMAT_ON_CODE_COMMIT
+
 if [ $DONT_FORMAT_ON_CODE_COMMIT ]; then
     echo """
         Skipping auto-format!!!
