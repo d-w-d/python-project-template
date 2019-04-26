@@ -10,7 +10,7 @@ import typing
 from module_example import demo_variable_imported_from_module as x
 from package_example import demo_variable_imported_from_package as y
 
-print("\n>>>" + x)
+print("\n>>>" + x               )
 print("\n>>>" + y)
 
 #
