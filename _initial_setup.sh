@@ -40,8 +40,16 @@ main() {
     ### 3. Activate VENV
     source ./.venv/bin/activate
 
-    ### 4. Install dependencies from Pipfile & Pipfile.lock
-    PIPENV_VERBOSITY=-1 pipenv install --dev
+    ### 4. Install dependencies
+    if [[ $1 == 'pip' ]]; then
+        # Specify 'pip' to use pip install
+        echo "Installing dependencies with pip"
+        bash _pip_install.sh
+    else
+        # Default installation is with pipenv
+        echo "Installing dependencies with pipenv"
+        PIPENV_VERBOSITY=-1 pipenv install --dev
+    fi
 
     ### 5. Link git pre-commit-hook script
     ln -fs $PWD/_precommit_hook.sh $PWD/.git/hooks/pre-commit

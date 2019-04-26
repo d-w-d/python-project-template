@@ -14,7 +14,7 @@ class MyClass:
     x = 5
 
 
-p1 = MyClass()
+p1: MyClass = MyClass()
 print(p1.x)
 
 
