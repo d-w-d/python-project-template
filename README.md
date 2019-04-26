@@ -153,13 +153,15 @@ The 'classic' way to install and manage packages is using `pip`. When you create
 
 The more modern way to manage packages is with the `pipenv` tool. `pipenv` was designed to handle _everything_ to do with virtual environments and package management, but we're only using it here for package management. Unlike `pip`, the `pipenv` tool will generate a "lock file" that enables deterministic builds and handles potentially conflicting dependency-package requirements. (This is analogous to `Gemfile.lock` in ruby and `package-lock.json` in node; see [here](https://pipenv.readthedocs.io/en/latest/) for more info on the subject.)
 
-So, to operate this repo, you need to have `pipenv` globally installed on your system. To get that, run the following global command (i.e. not with a virtual environment activated) commands:
+So, to operate this repo, you need to have `pipenv` globally installed on your system. To get `pipenv` either install it with your OS package manager (e.g. `brew install pipenv`), or run the following global commands (i.e. not with a virtual environment activated):
 
 ```bash
 pip3 install pipenv
 ### Test for success:
 which pipenv
 ```
+
+By the way, this repo also includes a script `_freeze_requirements.sh` which will record all packages installed to your project's virtual environment in the file `requirements.txt`. So if you run into difficulties with `pipenv` (which I did recently when installing on a raspberry pi), you can fall back to the 'classic' way of managing packages; just run script `_pip_install.sh` to install the contents of `requirements.txt` to your venv, and use `_freeze_requirements.sh` to update `requirements.txt` for version control.
 
 ### Operating This Repo
 
@@ -225,7 +227,7 @@ Auto-formatting normally solves formatting problems in our code. But we also wan
 - Add `"python.linting.pylintEnabled": true` to `.vscode/settings.json`
 - Add a pylint configuration file `.pylintrc` to your root dir
 
-Note: in addition to flagging problems in the VSCode interface, you can also run `pylint src` from the command line to analyze your code in the `src` directory and print out a report. This can be useful in continuous-integration scenarios where you want your code to pass certain quality-control standards before getting merged or deployed.
+Note: in addition to flagging problems in the VSCode interface, you can also run `pylint src` from the command line to analyze your code in the `src` directory and print out a report (or run `sh _lint_code.sh`). This can be useful in continuous-integration scenarios where you want your code to pass certain quality-control standards before getting merged or deployed.
 
 #### Type Safety in VSCode
 
@@ -240,7 +242,7 @@ Python is a dynamically typed language, which basically means that types are app
 
 If you want to employ test-driven development, then you'll need to run python's tool for unit testing `pytest` from the root dir (or any files that you wish to target). `pytest` will look for functions in your code beginning with `test_`, run them, and report the results of the `assert` command.
 
-This repo places all unit tests in files prefixed `test_*.py` (which is what `pytest` looks for) in the `tests` directory. You can then run tests by the command `pytest --verbose tests` in order to print out a testing report to screen. If any of these tests fail then they will cause most continuous-integration pipelines to fail, thus providing a safety mechanism when committing code.
+This repo places all unit tests in files prefixed `test_*.py` (which is what `pytest` looks for) in the `tests` directory. You can then run tests by the command `pytest --verbose tests` in order to print out a testing report to screen. You can also run these tests with the script `_tests.sh`. If any of these tests fail then they will cause most continuous-integration pipelines to fail, thus providing a safety mechanism when committing code.
 
 If all goes well, then you'll have a rich python-coding experience with VSCode. Enjoy!
 
