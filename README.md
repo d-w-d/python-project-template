@@ -163,6 +163,14 @@ which pipenv
 
 By the way, this repo also includes a script `_freeze_requirements.sh` which will record all packages installed to your project's virtual environment in the file `requirements.txt`. So if you run into difficulties with `pipenv` (which I did recently when installing on a raspberry pi), you can fall back to the 'classic' way of managing packages; just run script `_pip_install.sh` to install the contents of `requirements.txt` to your venv, and use `_freeze_requirements.sh` to update `requirements.txt` for version control.
 
+If you prefer using `pip` to `pipenv`, then you can ignore `pipenv` altogether and source your initialization script with the argument `pip`:
+
+```bash
+source _initial_setup.sh pip
+```
+
+(At the moment, I personally prefer to maintain both `Pipfile/Pipfile.lock` _and_ `requirements.txt` as I develop projects.)
+
 ### Operating This Repo
 
 #### Initialization Script
@@ -181,9 +189,11 @@ Running `source _initial_setup.sh` is an idempotent process, so it doesn't hurt 
 
 #### Adding Packages
 
-As you develop your coe within your virtual environment, you'll be adding python packages using `pipenv install PACKAGENAME` or `pipenv install --dev PACKAGENAME`, which will install the new package to `.venv` and add it to the `Pipfile` and `Pipefile.lock` files.
+As you develop your code within your virtual environment, you'll be adding python packages using `pipenv install PACKAGENAME` or `pipenv install --dev PACKAGENAME`, which will install the new package to `.venv` and add it to the `Pipfile` and `Pipefile.lock` files.
 
 I recommend that you install packages without the `--dev` flag iff the package will be needed at application runtime (e.g. `flask`). If the package is only needed for development (e.g. `pytest`), then use `--dev`.
+
+Likewise, to update your `requirements.txt` file, run `_freeze_requirements.sh` after you install packages.
 
 #### Directory Structure
 
