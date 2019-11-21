@@ -1,0 +1,42 @@
+#! /bin/bash
+
+#############################################################
+### Script to export env vars from .env file with comments
+### Run with -v for verbose output
+#############################################################
+
+main() {
+
+    # Test if sed is gnu sed
+    MYSED=sed
+    gnu_mentions=$(sed --version 2>&1 | grep 'GNU' | wc -l | xargs -I VAR bash -c "echo VAR")
+
+    # If gnu isn't mentioned after `sed --version` then conclude it's not gnu sed
+    if [[ $gnu_mentions == 0 ]]; then
+
+        # If gsed exists then use it instead of sed
+        if [[ $(command -v gsed) ]]; then
+            MYSED=gsed
+        else
+            echo """
+                This script only works with GNU sed.
+                If you are on a MAC then use 'brew install gnu-sed'
+            """
+            exit 1
+        fi
+    fi
+
+    # GNU-sed expression to export vars while ignore comments in .env file
+    cmd=$($MYSED -ne '/^#/d; /^export / {p;d}; /.*=/ s/^/export / p' .env)
+    eval $cmd
+}
+
+if [[ $1 == 'jenkins' ]]; then
+    ## Jenkins will error if you use the trick in the else clause
+    echo ">>> Running from jenkins"
+    main
+else
+    ## Trick to check if this script is being sourced or sh-ed
+    unset BASH_SOURCE 2>/dev/null
+    test ".$0" == ".$BASH_SOURCE" && echo "You must <SOURCE> (not SH) this script!!!" || main "$@"
+fi

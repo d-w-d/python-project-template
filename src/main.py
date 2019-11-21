@@ -48,3 +48,7 @@ class Pet:
 
 pet1: Pet = Pet("Scooby", "Dog")
 pet1.who_am_i()
+
+pets: typing.List[Pet] = [pet1, Pet("Garfield", "Cat")]
+names: typing.List[str] = [item.name for item in pets]
+print(names)

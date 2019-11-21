@@ -26,13 +26,7 @@ main() {
     find . -type d ! -path './.venv/*' -name '.pytest_cache' -exec rm -rf {} +
 
     ### 2. Load vars defined in .env
-    if [ -f $PWD/.env ]; then
-        echo "Loading env vars from .env"
-        eval $(cat .env | sed 's/^/export /')
-    else
-        echo "No .env file found!"
-        return 1
-    fi
+    source _load_env_vars
 
     ### 3. Check for existence of `.venv` dir
     if [ ! -d $PWD/.venv ]; then
