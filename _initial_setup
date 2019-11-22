@@ -41,7 +41,7 @@ main() {
     if [[ $1 == 'pip' ]]; then
         # Specify 'pip' to use pip install
         echo "Installing dependencies with pip"
-        bash _pip_install.sh
+        ./_pip_install
     else
         # Default installation is with pipenv
         echo "Installing dependencies with pipenv"
@@ -49,7 +49,7 @@ main() {
     fi
 
     ### 6. Link git pre-commit-hook script
-    ln -fs $PWD/_precommit_hook.sh $PWD/.git/hooks/pre-commit
+    ln -fs $PWD/_precommit_hook $PWD/.git/hooks/pre-commit
 
 }
 

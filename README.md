@@ -161,12 +161,12 @@ pip3 install pipenv
 which pipenv
 ```
 
-By the way, this repo also includes a script `_freeze_requirements.sh` which will record all packages installed to your project's virtual environment in the file `requirements.txt`. So if you run into difficulties with `pipenv` (which I did recently when installing on a raspberry pi), you can fall back to the 'classic' way of managing packages; just run script `_pip_install.sh` to install the contents of `requirements.txt` to your venv, and use `_freeze_requirements.sh` to update `requirements.txt` for version control.
+By the way, this repo also includes a script `_freeze_requirements` which will record all packages installed to your project's virtual environment in the file `requirements.txt`. So if you run into difficulties with `pipenv` (which I did recently when installing on a raspberry pi), you can fall back to the 'classic' way of managing packages; just run script `_pip_install` to install the contents of `requirements.txt` to your venv, and use `_freeze_requirements` to update `requirements.txt` for version control.
 
 If you prefer using `pip` to `pipenv`, then you can ignore `pipenv` altogether and source your initialization script with the argument `pip`:
 
 ```bash
-source _initial_setup.sh pip
+source _initial_setup pip
 ```
 
 (At the moment, I personally prefer to maintain both `Pipfile/Pipfile.lock` _and_ `requirements.txt` as I develop projects.)
@@ -175,17 +175,17 @@ source _initial_setup.sh pip
 
 #### Initialization Script
 
-This repo includes a script called `_initial_setup.sh` that makes it easy and consistent to start up your python virtual environment.
+This repo includes a script called `_initial_setup` that makes it easy and consistent to start up your python virtual environment.
 
 The first thing this script does is to load in the contents of the `.env` file in order to locate the `python3` executable on your machine. (The `.env` file is not committed to the git repo since, in general, it will contain passwords and directory structures that you want to keep confidential, so copy `.env-template` to `.env` and fill in the paths for `PYTHON_3_5_OR_HIGHER`, etc.)
 
-`_initial_setup.sh` is designed to fail unless it is _sourced_ from your command line (and not executed with e.g. `sh`).
+`_initial_setup` is designed to fail unless it is _sourced_ from your command line (and not executed with e.g. `sh`).
 
 <!-- Once it creates the python virtual environment and activates it, it upgrades pip and installs all packages specified in `requirements.txt` to your virtual environment. -->
 
 Once it creates the python virtual environment and activates it, it uses `pipenv` to install requirements specified in the `Pipfile`.
 
-Running `source _initial_setup.sh` is an idempotent process, so it doesn't hurt to run it multiple times, and you are encourgaed of getting into the habit of running this script regularly to make sure your acting within a fully-configured development mode. Once activated, your virtual environment's name `.venv` will be displayed at your command prompt.
+Running `source _initial_setup` is an idempotent process, so it doesn't hurt to run it multiple times, and you are encourgaed of getting into the habit of running this script regularly to make sure your acting within a fully-configured development mode. Once activated, your virtual environment's name `.venv` will be displayed at your command prompt.
 
 #### Adding Packages
 
@@ -193,11 +193,11 @@ As you develop your code within your virtual environment, you'll be adding pytho
 
 I recommend that you install packages without the `--dev` flag iff the package will be needed at application runtime (e.g. `flask`). If the package is only needed for development (e.g. `pytest`), then use `--dev`.
 
-Likewise, to update your `requirements.txt` file, run `_freeze_requirements.sh` after you install packages.
+Likewise, to update your `requirements.txt` file, run `_freeze_requirements` after you install packages.
 
 #### Directory Structure
 
-All scripts and configuration files are in the root directory. The source code for your application is in `src`. This repo includes a super simple application (`src/main.py`) that loads in and prints a variable from a simple example [homemade python package](https://www.programiz.com/python-programming/package). Once the virtual environment is activated you run your application using `_run_app.sh` (a simple wrapper around `python src/main.py`).
+All scripts and configuration files are in the root directory. The source code for your application is in `src`. This repo includes a super simple application (`src/main.py`) that loads in and prints a variable from a simple example [homemade python package](https://www.programiz.com/python-programming/package). Once the virtual environment is activated you run your application using `_run_app` (a simple wrapper around `python src/main.py`).
 
 ### VSCode Set Up
 
@@ -231,7 +231,7 @@ You do NOT want to spend time/effort lining up code blocks, tabbing brackets, et
 
 #### Auto-Formatting with Git Pre-Commit Hook
 
-To ensure that we have consistent code formatting across developers' contributions, this repo includes a script called `_precommit_hook.sh`. The initialization script will link this script to `.git/hooks/pre-commit`, which is what `git` looks to run just before running the commit. With this in place, `autopep8` will run and format your code whenever you try to add a git commit.
+To ensure that we have consistent code formatting across developers' contributions, this repo includes a script called `_precommit_hook`. The initialization script will link this script to `.git/hooks/pre-commit`, which is what `git` looks to run just before running the commit. With this in place, `autopep8` will run and format your code whenever you try to add a git commit.
 
 #### Linting in VSCode
 
@@ -241,7 +241,7 @@ Auto-formatting normally solves formatting problems in our code. But we also wan
 - Add `"python.linting.pylintEnabled": true` to `.vscode/settings.json`
 - Add a pylint configuration file `.pylintrc` to your root dir
 
-Note: in addition to flagging problems in the VSCode interface, you can also run `pylint src` from the command line to analyze your code in the `src` directory and print out a report (or run `sh _lint_code.sh`). This can be useful in continuous-integration scenarios where you want your code to pass certain quality-control standards before getting merged or deployed.
+Note: in addition to flagging problems in the VSCode interface, you can also run `pylint src` from the command line to analyze your code in the `src` directory and print out a report (or run `sh _lint_code`). This can be useful in continuous-integration scenarios where you want your code to pass certain quality-control standards before getting merged or deployed.
 
 #### Type Safety in VSCode
 
@@ -256,7 +256,7 @@ Python is a dynamically typed language, which basically means that types are app
 
 If you want to employ test-driven development, then you'll need to run python's tool for unit testing `pytest` from the root dir (or any files that you wish to target). `pytest` will look for functions in your code beginning with `test_`, run them, and report the results of the `assert` command.
 
-This repo places all unit tests in files prefixed `test_*.py` (which is what `pytest` looks for) in the `tests` directory. You can then run tests by the command `pytest --verbose tests` in order to print out a testing report to screen. You can also run these tests with the script `_tests.sh`. If any of these tests fail then they will cause most continuous-integration pipelines to fail, thus providing a safety mechanism when committing code.
+This repo places all unit tests in files prefixed `test_*.py` (which is what `pytest` looks for) in the `tests` directory. You can then run tests by the command `pytest --verbose tests` in order to print out a testing report to screen. You can also run these tests with the script `_tests`. If any of these tests fail then they will cause most continuous-integration pipelines to fail, thus providing a safety mechanism when committing code.
 
 If all goes well, then you'll have a rich python-coding experience with VSCode. Enjoy!
 
